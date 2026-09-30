@@ -1,0 +1,71 @@
+function analyzeResume() {
+
+    let resume = document.getElementById("resumeText").value.toLowerCase();
+
+    let skills = [
+        "python",
+        "java",
+        "sql",
+        "html",
+        "css",
+        "javascript",
+        "machine learning",
+        "data science",
+        "leadership",
+        "communication",
+        "git",
+        "github"
+    ];
+
+    let foundSkills = [];
+    let score = 0;
+
+    skills.forEach(skill => {
+        if(resume.includes(skill)){
+            foundSkills.push(skill);
+            score += 8;
+        }
+    });
+
+    if(score > 100){
+        score = 100;
+    }
+
+    document.getElementById("score").innerText = score;
+
+    let skillsList = document.getElementById("skillsList");
+    skillsList.innerHTML = "";
+
+    foundSkills.forEach(skill => {
+        let li = document.createElement("li");
+        li.textContent = skill;
+        skillsList.appendChild(li);
+    });
+
+    let suggestions = document.getElementById("suggestions");
+    suggestions.innerHTML = "";
+
+    if(!resume.includes("project")){
+        suggestions.innerHTML += "<li>Add Projects Section</li>";
+    }
+
+    if(!resume.includes("internship")){
+        suggestions.innerHTML += "<li>Add Internship Experience</li>";
+    }
+
+    if(!resume.includes("certification")){
+        suggestions.innerHTML += "<li>Add Certifications</li>";
+    }
+
+    if(!resume.includes("github")){
+        suggestions.innerHTML += "<li>Add GitHub Profile</li>";
+    }
+
+    if(foundSkills.length < 5){
+        suggestions.innerHTML += "<li>Add More Technical Skills</li>";
+    }
+
+    if(foundSkills.length === 0){
+        suggestions.innerHTML += "<li>No skills detected. Improve resume content.</li>";
+    }
+}
