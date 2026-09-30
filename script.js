@@ -32,6 +32,8 @@ function analyzeResume() {
     }
 
     document.getElementById("score").innerText = score;
+    document.getElementById("progressBar").style.width = score + "%";
+    
     let level = "";
 
 if(score >= 80){
