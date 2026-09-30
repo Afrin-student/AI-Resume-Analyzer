@@ -87,3 +87,36 @@ document.getElementById("level").innerText = level;
         suggestions.innerHTML += "<li>No skills detected. Improve resume content.</li>";
     }
 }
+
+document.getElementById("pdfUpload").addEventListener("change", async function(event) {
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = async function() {
+
+        const typedArray = new Uint8Array(this.result);
+
+        const pdf = await pdfjsLib.getDocument(typedArray).promise;
+
+        let text = "";
+
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+
+            const page = await pdf.getPage(pageNum);
+
+            const content = await page.getTextContent();
+
+            const strings = content.items.map(item => item.str);
+
+            text += strings.join(" ");
+        }
+
+        document.getElementById("resumeText").value = text;
+    };
+
+    reader.readAsArrayBuffer(file);
+});
