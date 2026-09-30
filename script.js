@@ -32,6 +32,22 @@ function analyzeResume() {
     }
 
     document.getElementById("score").innerText = score;
+    let level = "";
+
+if(score >= 80){
+    level = "Excellent";
+}
+else if(score >= 60){
+    level = "Good";
+}
+else if(score >= 40){
+    level = "Average";
+}
+else{
+    level = "Beginner";
+}
+
+document.getElementById("level").innerText = level;
 
     let skillsList = document.getElementById("skillsList");
     skillsList.innerHTML = "";
