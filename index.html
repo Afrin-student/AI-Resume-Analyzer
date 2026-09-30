@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>🤖 AI Resume Analyzer</h1>
+        <p>Paste your resume below and get instant analysis.</p>
+
+        <textarea id="resumeText" placeholder="Paste your resume here..."></textarea>
+
+        <button onclick="analyzeResume()">Analyze Resume</button>
+
+        <div id="result" class="result">
+            <h2>Analysis Result</h2>
+
+            <p><strong>Resume Score:</strong> <span id="score">0</span>/100</p>
+
+            <p><strong>Skills Found:</strong></p>
+            <ul id="skillsList"></ul>
+
+            <p><strong>Suggestions:</strong></p>
+            <ul id="suggestions"></ul>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
