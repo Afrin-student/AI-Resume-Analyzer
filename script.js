@@ -32,6 +32,23 @@ function analyzeResume() {
     }
 
     document.getElementById("score").innerText = score;
+    let scoreElement = document.getElementById("score");
+
+scoreElement.classList.remove(
+    "score-red",
+    "score-orange",
+    "score-green"
+);
+
+if(score < 60){
+    scoreElement.classList.add("score-red");
+}
+else if(score < 80){
+    scoreElement.classList.add("score-orange");
+}
+else{
+    scoreElement.classList.add("score-green");
+}
     document.getElementById("progressBar").style.width = score + "%";
     
     let level = "";
