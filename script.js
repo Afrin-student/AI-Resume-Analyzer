@@ -21,64 +21,76 @@ function analyzeResume() {
     let score = 0;
 
     skills.forEach(skill => {
-        if(resume.includes(skill)){
+        if (resume.includes(skill)) {
             foundSkills.push(skill);
             score += 8;
         }
     });
 
-    if(score > 100){
+    // Bonus Score
+    if (resume.includes("project")) score += 10;
+    if (resume.includes("internship")) score += 10;
+    if (resume.includes("certification")) score += 10;
+
+    if (score > 100) {
         score = 100;
     }
 
-    document.getElementById("score").innerText = score;
+    // ATS Score
     let scoreElement = document.getElementById("score");
+    scoreElement.innerText = score;
+
+    // Progress Bar
     let progressBar = document.getElementById("progressBar");
+    progressBar.style.width = score + "%";
 
-if(score < 60){
-    progressBar.style.background = "#ef4444";
-}
-else if(score < 80){
-    progressBar.style.background = "#f59e0b";
-}
-else{
-    progressBar.style.background = "#22c55e";
-}
+    // Progress Bar Color
+    if (score < 60) {
+        progressBar.style.backgroundColor = "#ef4444";
+    }
+    else if (score < 80) {
+        progressBar.style.backgroundColor = "#f59e0b";
+    }
+    else {
+        progressBar.style.backgroundColor = "#22c55e";
+    }
 
-scoreElement.classList.remove(
-    "score-red",
-    "score-orange",
-    "score-green"
-);
+    // Score Color
+    scoreElement.classList.remove(
+        "score-red",
+        "score-orange",
+        "score-green"
+    );
 
-if(score < 60){
-    scoreElement.classList.add("score-red");
-}
-else if(score < 80){
-    scoreElement.classList.add("score-orange");
-}
-else{
-    scoreElement.classList.add("score-green");
-}
-    document.getElementById("progressBar").style.width = score + "%";
-    
+    if (score < 60) {
+        scoreElement.classList.add("score-red");
+    }
+    else if (score < 80) {
+        scoreElement.classList.add("score-orange");
+    }
+    else {
+        scoreElement.classList.add("score-green");
+    }
+
+    // Resume Strength
     let level = "";
 
-if(score >= 80){
-    level = "Excellent";
-}
-else if(score >= 60){
-    level = "Good";
-}
-else if(score >= 40){
-    level = "Average";
-}
-else{
-    level = "Beginner";
-}
+    if (score >= 80) {
+        level = "Excellent";
+    }
+    else if (score >= 60) {
+        level = "Good";
+    }
+    else if (score >= 40) {
+        level = "Average";
+    }
+    else {
+        level = "Beginner";
+    }
 
-document.getElementById("level").innerText = level;
+    document.getElementById("level").innerText = level;
 
+    // Skills List
     let skillsList = document.getElementById("skillsList");
     skillsList.innerHTML = "";
 
@@ -88,35 +100,37 @@ document.getElementById("level").innerText = level;
         skillsList.appendChild(li);
     });
 
+    // Suggestions
     let suggestions = document.getElementById("suggestions");
     suggestions.innerHTML = "";
 
-    if(!resume.includes("project")){
+    if (!resume.includes("project")) {
         suggestions.innerHTML += "<li>Add Projects Section</li>";
     }
 
-    if(!resume.includes("internship")){
+    if (!resume.includes("internship")) {
         suggestions.innerHTML += "<li>Add Internship Experience</li>";
     }
 
-    if(!resume.includes("certification")){
+    if (!resume.includes("certification")) {
         suggestions.innerHTML += "<li>Add Certifications</li>";
     }
 
-    if(!resume.includes("github")){
+    if (!resume.includes("github")) {
         suggestions.innerHTML += "<li>Add GitHub Profile</li>";
     }
 
-    if(foundSkills.length < 5){
+    if (foundSkills.length < 5) {
         suggestions.innerHTML += "<li>Add More Technical Skills</li>";
     }
 
-    if(foundSkills.length === 0){
+    if (foundSkills.length === 0) {
         suggestions.innerHTML += "<li>No skills detected. Improve resume content.</li>";
     }
 }
 
-document.getElementById("pdfUpload").addEventListener("change", async function(event) {
+// PDF Upload Feature
+document.getElementById("pdfUpload").addEventListener("change", async function (event) {
 
     const file = event.target.files[0];
 
@@ -124,7 +138,7 @@ document.getElementById("pdfUpload").addEventListener("change", async function(e
 
     const reader = new FileReader();
 
-    reader.onload = async function() {
+    reader.onload = async function () {
 
         const typedArray = new Uint8Array(this.result);
 
