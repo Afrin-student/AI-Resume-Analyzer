@@ -90,4 +90,17 @@ ul{
     width:0%;
     background:#22c55e;
 }
+.score-red{
+    color:red;
+    font-weight:bold;
+}
 
+.score-orange{
+    color:orange;
+    font-weight:bold;
+}
+
+.score-green{
+    color:green;
+    font-weight:bold;
+}
