@@ -135,3 +135,11 @@ li{
 strong{
     color:#111827;
 }
+#downloadBtn{
+    margin-top:15px;
+    background:#16a34a;
+}
+
+#downloadBtn:hover{
+    background:#15803d;
+}
