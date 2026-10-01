@@ -33,6 +33,17 @@ function analyzeResume() {
 
     document.getElementById("score").innerText = score;
     let scoreElement = document.getElementById("score");
+    let progressBar = document.getElementById("progressBar");
+
+if(score < 60){
+    progressBar.style.background = "#ef4444";
+}
+else if(score < 80){
+    progressBar.style.background = "#f59e0b";
+}
+else{
+    progressBar.style.background = "#22c55e";
+}
 
 scoreElement.classList.remove(
     "score-red",
