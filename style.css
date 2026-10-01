@@ -7,7 +7,6 @@
 
 body{
     background:linear-gradient(135deg,#0f172a,#1e293b);
-    color:white;
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -16,13 +15,12 @@ body{
 }
 
 .container{
-    background:#ffffff;
-    color:#000;
     width:100%;
-    max-width:800px;
+    max-width:850px;
+    background:white;
     padding:30px;
-    border-radius:15px;
-    box-shadow:0 0 20px rgba(0,0,0,0.3);
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
 
 h1{
@@ -40,69 +38,100 @@ textarea{
     height:250px;
     padding:15px;
     border:2px solid #2563eb;
-    border-radius:10px;
+    border-radius:12px;
     resize:none;
-    margin-top:10px;
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+input[type="file"]{
+    width:100%;
+    padding:12px;
+    border:2px dashed #2563eb;
+    border-radius:12px;
+    margin-bottom:15px;
+    cursor:pointer;
 }
 
 button{
     width:100%;
     padding:15px;
-    margin-top:15px;
     border:none;
+    border-radius:12px;
     background:#2563eb;
     color:white;
     font-size:18px;
-    border-radius:10px;
+    font-weight:bold;
     cursor:pointer;
+    transition:all 0.3s ease;
 }
 
 button:hover{
+    transform:translateY(-3px);
     background:#1d4ed8;
 }
 
 .result{
     margin-top:25px;
+    background:#f8fafc;
     padding:20px;
-    border-radius:10px;
-    background:#f3f4f6;
+    border-radius:15px;
+    border:1px solid #e5e7eb;
 }
 
 .result h2{
     color:#2563eb;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
-ul{
-    margin-left:20px;
-}
 .progress{
     width:100%;
     height:25px;
-    background:#ddd;
+    background:#e5e7eb;
     border-radius:20px;
     overflow:hidden;
-    margin:10px 0;
+    margin:12px 0;
 }
 
-
-    #progressBar{
+#progressBar{
     height:100%;
     width:0%;
-    background:#22c55e;
+    border-radius:20px;
     transition:all 0.8s ease;
 }
+
 .score-red{
-    color:red;
+    color:#ef4444;
     font-weight:bold;
+    font-size:20px;
 }
 
 .score-orange{
-    color:orange;
+    color:#f59e0b;
     font-weight:bold;
+    font-size:20px;
 }
 
 .score-green{
-    color:green;
+    color:#22c55e;
     font-weight:bold;
+    font-size:20px;
+}
+
+#level{
+    font-weight:bold;
+    color:#2563eb;
+}
+
+ul{
+    margin-left:25px;
+    margin-top:8px;
+}
+
+li{
+    margin-bottom:6px;
+}
+
+strong{
+    color:#111827;
 }
