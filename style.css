@@ -85,10 +85,12 @@ ul{
     margin:10px 0;
 }
 
-#progressBar{
+
+    #progressBar{
     height:100%;
     width:0%;
     background:#22c55e;
+    transition:all 0.8s ease;
 }
 .score-red{
     color:red;
