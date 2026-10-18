@@ -17,15 +17,25 @@ function analyzeResume() {
         "github"
     ];
 
-    let foundSkills = [];
-    let score = 0;
+  let foundSkills = [];
+let score = 0;
 
-    skills.forEach(skill => {
-        if (resume.includes(skill)) {
-            foundSkills.push(skill);
-            score += 8;
-        }
-    });
+skills.forEach(skill => {
+    const escapedSkill = skill.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+    );
+
+    const skillPattern = new RegExp(
+        "\\b" + escapedSkill + "\\b",
+        "i"
+    );
+
+    if (skillPattern.test(resume)) {
+        foundSkills.push(skill);
+        score += 8;
+    }
+});
 
     if (resume.includes("project")) score += 10;
     if (resume.includes("internship")) score += 10;
