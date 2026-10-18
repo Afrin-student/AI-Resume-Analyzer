@@ -37,9 +37,11 @@ skills.forEach(skill => {
     }
 });
 
-    if (resume.includes("project")) score += 10;
-    if (resume.includes("internship")) score += 10;
-    if (resume.includes("certification")) score += 10;
+const resumeLower = resume.toLowerCase();
+
+if (/\bprojects?\b/.test(resumeLower)) score += 10;
+if (/\binternships?\b/.test(resumeLower)) score += 10;
+if (/\bcertifications?\b/.test(resumeLower)) score += 10;
 
     if (score > 100) score = 100;
 
@@ -98,21 +100,21 @@ skills.forEach(skill => {
     let suggestions = document.getElementById("suggestions");
     suggestions.innerHTML = "";
 
-    if (!resume.includes("project")) {
-        suggestions.innerHTML += "<li>Add Projects Section</li>";
-    }
+   if (!/\bprojects?\b/.test(resumeLower)) {
+    suggestions.innerHTML += "<li>Add Projects Section</li>";
+}
 
-    if (!resume.includes("internship")) {
-        suggestions.innerHTML += "<li>Add Internship Experience</li>";
-    }
+if (!/\binternships?\b/.test(resumeLower)) {
+    suggestions.innerHTML += "<li>Add Internship Experience</li>";
+}
 
-    if (!resume.includes("certification")) {
-        suggestions.innerHTML += "<li>Add Certifications</li>";
-    }
+if (!/\bcertifications?\b/.test(resumeLower)) {
+    suggestions.innerHTML += "<li>Add Certifications</li>";
+}
 
-    if (!resume.includes("github")) {
-        suggestions.innerHTML += "<li>Add GitHub Profile</li>";
-    }
+if (!/\bgithub\b/i.test(resume)) {
+    suggestions.innerHTML += "<li>Add GitHub Profile</li>";
+}
 
     if (foundSkills.length < 5) {
         suggestions.innerHTML += "<li>Add More Technical Skills</li>";
