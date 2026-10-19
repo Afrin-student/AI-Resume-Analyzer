@@ -1,48 +1,221 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Resume Analyzer</title>
+    <meta name="theme-color" content="#111827">
+    <meta name="description" content="Analyze your resume, check skills, compare job descriptions, and get actionable resume improvement tips.">
+    <title>AI Resume Analyzer | Pro</title>
+
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="AI Resume Analyzer home">
+            <span class="brand-icon">✦</span>
+            <span>Resume<span class="brand-accent">IQ</span></span>
+        </a>
+        <span class="topbar-label">SMART RESUME TOOLKIT</span>
+    </header>
 
-    <div class="container">
+    <main class="container">
+        <section class="hero">
+            <div class="eyebrow"><span class="status-dot"></span> YOUR CAREER, UPGRADED</div>
+            <h1>Make your resume<br> <span>stand out.</span></h1>
+            <p>Analyze your resume, discover missing skills, and improve your chances of getting noticed.</p>
+        </section>
 
-        <h1>🤖 AI Resume Analyzer</h1>
-        <p>Paste your resume below and get instant analysis.</p>
+        <section class="panel input-panel">
+            <div class="section-heading">
+                <div>
+                    <span class="step-label">STEP 01</span>
+                    <h2>Your resume</h2>
+                    <p>Paste your resume or upload a text-based PDF.</p>
+                </div>
+                <span class="heading-icon">📄</span>
+            </div>
 
-        <textarea id="resumeText" placeholder="Paste your resume here..."></textarea>
-        <input type="file" id="pdfUpload" accept=".pdf">
-<br><br>
+            <label class="field-label" for="resumeText">RESUME CONTENT</label>
+            <textarea id="resumeText" maxlength="60000"
+                placeholder="Paste your resume here...&#10;&#10;Include your education, skills, projects, internship experience, and achievements."
+                spellcheck="true"></textarea>
+            <div class="field-footer">
+                <span id="resumeCounter">0 characters</span>
+                <button type="button" id="clearTextBtn" class="text-button">Clear text</button>
+            </div>
 
-        <button onclick="analyzeResume()">Analyze Resume</button>
+            <label class="upload-zone" for="pdfUpload">
+                <span class="upload-icon">↑</span>
+                <span class="upload-copy">
+                    <strong>Upload your resume PDF</strong>
+                    <small>Choose a PDF file up to 10 MB</small>
+                </span>
+                <span class="upload-action">Browse files</span>
+            </label>
+            <input type="file" id="pdfUpload" accept=".pdf,application/pdf" hidden>
+            <p id="fileStatus" class="file-status" aria-live="polite">No PDF selected</p>
 
-        <div id="result" class="result">
-            <h2>Analysis Result</h2>
+            <div class="divider"><span>OPTIONAL</span></div>
 
-            <p><strong>ATS Score:</strong> <span id="score">0</span>/<span id="scoreTotal">100</span></p>
-            <div class="progress">
-    <div id="progressBar"></div>
-</div>
-            <p><strong>Resume Strength:</strong> <span id="level"></span></p>
+            <div class="section-heading compact-heading">
+                <div>
+                    <h2>Target job description</h2>
+                    <p>Compare your resume with a specific job posting for a more useful match estimate.</p>
+                </div>
+                <span class="heading-icon">🎯</span>
+            </div>
 
-            <p><strong>Skills Found:</strong></p>
-            <ul id="skillsList"></ul>
+            <label class="field-label" for="jobDescription">JOB DESCRIPTION</label>
+            <textarea id="jobDescription" class="job-textarea" maxlength="30000"
+                placeholder="Paste the job description here to identify relevant skills and missing keywords..."></textarea>
+            <div class="field-footer">
+                <span id="jobCounter">0 characters</span>
+                <span class="optional-label">Not required</span>
+            </div>
 
-            <p><strong>Suggestions:</strong></p>
-            <ul id="suggestions"></ul>
-            <button id="downloadBtn" onclick="downloadReport()">
-    Download Report
-</button>
+            <div class="button-row">
+                <button type="button" id="analyzeBtn" class="primary-button">
+                    <span>✦</span> Analyze resume
+                </button>
+                <button type="button" id="resetBtn" class="secondary-button">Reset all</button>
+            </div>
+            <p id="appStatus" class="app-status" role="status" aria-live="polite"></p>
+        </section>
 
-        </div>
+        <section id="result" class="results-section" hidden>
+            <div class="results-title">
+                <div>
+                    <span class="step-label">YOUR RESULTS</span>
+                    <h2>Resume analysis</h2>
+                    <p>Here is your personalized improvement report.</p>
+                </div>
+                <span class="results-badge">ANALYSIS COMPLETE</span>
+            </div>
 
-    </div>
+            <div class="dashboard-grid">
+                <article class="panel score-card">
+                    <span class="card-label">RESUME SCORE</span>
+                    <div id="scoreRing" class="score-ring">
+                        <div class="score-ring-inner">
+                            <span id="score">0</span>
+                            <small>out of 100</small>
+                        </div>
+                    </div>
+                    <h3 id="level">—</h3>
+                    <p id="scoreSummary">Your resume assessment will appear here.</p>
+                    <div class="progress">
+                        <div id="progressBar"></div>
+                    </div>
+                    <p class="fine-print">A rule-based estimate, not an actual ATS result.</p>
+                </article>
 
-    <script src="script.js"></script>
+                <article class="panel overview-card">
+                    <span class="card-label">AT A GLANCE</span>
+                    <div class="metric-row">
+                        <div class="metric-icon purple">✓</div>
+                        <div><small>Skills detected</small><strong id="skillCount">0</strong></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-icon blue">◎</div>
+                        <div><small>Resume sections found</small><strong id="sectionCount">0 / 6</strong></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-icon green">↗</div>
+                        <div><small>Job skill match</small><strong id="matchPercent">Add a job description</strong></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-icon orange">!</div>
+                        <div><small>Improvement tips</small><strong id="suggestionCount">0</strong></div>
+                    </div>
+                </article>
+            </div>
 
+            <article class="panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="step-label">SCORE DETAILS</span>
+                        <h2>Score breakdown</h2>
+                    </div>
+                    <span class="heading-icon">📊</span>
+                </div>
+                <p class="muted-text">See how each part contributes to your overall estimate.</p>
+                <div id="scoreBreakdown" class="breakdown-list"></div>
+            </article>
+
+            <article class="panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="step-label">YOUR SKILLS</span>
+                        <h2>Skills detected</h2>
+                    </div>
+                    <span class="heading-icon">⚡</span>
+                </div>
+                <p class="muted-text">Skills are identified using text matching. Check that every listed skill accurately reflects your experience.</p>
+                <div id="skillsList" class="skill-groups"></div>
+                <p id="noSkillsMessage" class="empty-message" hidden>No recognized skills were detected. Try adding your relevant technical and professional skills.</p>
+            </article>
+
+            <article id="jobMatchCard" class="panel" hidden>
+                <div class="section-heading">
+                    <div>
+                        <span class="step-label">JOB MATCH</span>
+                        <h2>Compare with target role</h2>
+                    </div>
+                    <span class="heading-icon">🎯</span>
+                </div>
+                <p id="jobMatchSummary" class="muted-text"></p>
+                <div class="match-columns">
+                    <div>
+                        <h3 class="subheading">Matched skills</h3>
+                        <div id="matchedKeywords" class="keyword-list"></div>
+                    </div>
+                    <div>
+                        <h3 class="subheading">Skills to consider adding</h3>
+                        <div id="missingKeywords" class="keyword-list"></div>
+                    </div>
+                </div>
+                <p class="fine-print">Only add missing skills when you genuinely have them. Job descriptions can include terms that a simple text matcher cannot interpret.</p>
+            </article>
+
+            <article class="panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="step-label">STRUCTURE CHECK</span>
+                        <h2>Resume sections</h2>
+                    </div>
+                    <span class="heading-icon">☷</span>
+                </div>
+                <div id="sectionChecklist" class="checklist"></div>
+            </article>
+
+            <article class="panel suggestions-panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="step-label">NEXT STEPS</span>
+                        <h2>Improvement plan</h2>
+                        <p>Practical suggestions based on the text we found.</p>
+                    </div>
+                    <span class="heading-icon">💡</span>
+                </div>
+                <ul id="suggestions" class="suggestion-list"></ul>
+            </article>
+
+            <div class="report-actions">
+                <button type="button" id="downloadBtn" class="primary-button">↓ Download report</button>
+                <button type="button" id="copyBtn" class="secondary-button">Copy report text</button>
+            </div>
+            <p id="reportStatus" class="app-status" role="status" aria-live="polite"></p>
+            <p class="disclaimer">Privacy note: analysis runs in your browser. The text you enter is not sent to an AI service by this page. PDF processing uses the PDF.js library loaded from a CDN.</p>
+        </section>
+
+        <footer class="footer">
+            <span>ResumeIQ · Built for your next opportunity</span>
+            <span>Review every suggestion before updating your resume.</span>
+        </footer>
+    </main>
 </body>
 </html>
+
