@@ -1,66 +1,73 @@
-# 🤖 AI Resume Analyzer
+# ResumeIQ — AI Resume Analyzer 🚀
 
-A web-based Resume Analyzer that helps users evaluate their resumes using ATS-style scoring.
+**Analyze your resume. Discover your strengths. Improve your career opportunities.**
 
-## 🚀 Features
+ResumeIQ is a web-based resume analysis application designed to help job seekers evaluate their resumes, identify relevant skills, and discover opportunities for improvement.
 
-- Upload Resume PDF
-- Automatic PDF Text Extraction
-- ATS Score Calculation
-- Skill Detection
-- Resume Strength Evaluation
-- Improvement Suggestions
-- Download Analysis Report
+🌐 **Live Demo:** https://afrin-student.github.io/AI-Resume-Analyzer/
 
-## 🛠️ Technologies Used
+# Features
+-  **Resume Upload:** Upload a PDF resume for text extraction and analysis.
+-  **Resume Scoring:** Evaluate resumes using a rule-based scoring system.
+-  **Skill Detection:** Identify technical and professional skills.
+-  **Job Description Matching:** Compare resume content against a provided job description.
+-  **Improvement Suggestions:** Receive recommendations based on detected resume content.
+-  **Section Analysis:** Check for important resume sections.
+-  **Download Report:** Save the analysis report.
+-  **Copy Report:** Copy results for convenient sharing.
+-  **Responsive Interface:** Use the application on supported desktop and mobile browsers.
 
-- HTML
-- CSS
+# Technologies Used
+
+- HTML5
+- CSS3
 - JavaScript
 - PDF.js
 - GitHub Pages
 
-## 📊 How It Works
+# How It Works
 
-1. Upload your resume PDF.
-2. Resume text is extracted automatically.
-3. Click Analyze Resume.
-4. Get ATS Score, Skills Found, and Suggestions.
-5. Download the analysis report.
+1. Open the ResumeIQ website.
+2. Upload a PDF resume or enter resume text.
+3. Optionally provide a job description.
+4. Start the analysis.
+5. Review the score, detected skills, section checks, and suggestions.
+6. Download or copy the report.
 
-## 💡 Skills Detected
+## Project Structure
 
-- Python
-- Java
-- SQL
-- HTML
-- CSS
-- JavaScript
-- Machine Learning
-- Data Science
-- Git
-- GitHub
-- Communication
-- Leadership
+```text
+AI-Resume-Analyzer/
+│
+├── index.html
+├── style.css
+├── script.js
+└── README.md
+```
 
-## 🌐 Live Demo
+## Project Objective
 
-Add your GitHub Pages link here:
+The objective of ResumeIQ is to make preliminary resume evaluation easier and help job seekers understand how to improve their resumes for career opportunities.
 
-https://afrin-student.github.io/AI-Resume-Analyzer/
+## Future Enhancements
 
-## 👩‍💻 Developer
+- Secure integration with a genuine AI model
+- More personalized resume feedback
+- Improved job description matching
+- Enhanced resume comparison
+- Additional reporting and analysis features
 
-Afrin
+##  Current Limitations
 
-B.Tech Artificial Intelligence & Data Science
+The current version uses rule-based analysis and keyword matching. Its score is an indicative estimate, not an official ATS score or a guarantee of recruitment success.
 
-Final Year Student
+Scanned PDFs may require OCR to extract text reliably.
 
-## 📌 Future Enhancements
+##  Developer
 
-- Bulk Resume Analysis
-- PDF Report Download
-- Resume Ranking System
-- AI-Based Resume Suggestions
-- Recruiter Dashboard
+**Afrin**  
+B.Tech — Artificial Intelligence and Data Science
+
+##  License
+
+This project is intended for educational and portfolio purposes. Add an appropriate open-source license if you decide to distribute the project under specific reuse permissions.
